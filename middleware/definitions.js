@@ -1,5 +1,6 @@
 const { match } = require("path-to-regexp");
 const Arena = require('are.na');
+const { paginatedChannelGet } = require('../lib/api');
 
 const { ARENA_CHANNEL_ID } = process.env;
 const matchPathDefinition = match('/:definition(\\d+)', { decode: decodeURIComponent, end: false });
@@ -7,7 +8,7 @@ const matchPathDefinition = match('/:definition(\\d+)', { decode: decodeURICompo
 module.exports = async (req, res, next) => {
 
   const arena = new Arena();
-  const data = await arena.channel(ARENA_CHANNEL_ID).get();
+  const data = await paginatedChannelGet(arena, ARENA_CHANNEL_ID);
   // filter the default channel's blocks by the 'Text' class
   // and then sort by date last updated, descending
   //changed from updated --> created

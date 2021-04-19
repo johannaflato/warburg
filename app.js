@@ -38,8 +38,10 @@ app
   .use(cookieParser())
   .use(express.static(path.join(__dirname, 'public')))
   .use(helpers)
-   // add current or matched definition to template res.locals
-  .use(definitions);
+  // add current or matched definition to template res.locals
+  .use(definitions)
+  // add main channels to template res.locals
+  .use(mainchannels);
 
 // Setup view router
 router
